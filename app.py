@@ -34,7 +34,7 @@ def summarize_input(text, pdf_file):
         min_length=100,
         do_sample=False,
         num_beams=3,
-        length_penalty=1.0,
+        length_penalty=2.0,
         no_repeat_ngram_size=2
     )
     summary = result[0].get('summary_text') or result[0].get('generated_text') or str(result[0])
