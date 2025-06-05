@@ -31,7 +31,7 @@ def summarize_input(text, pdf_file):
     result = summarizer(
         text,
         max_length=1000,
-        min_length=50,
+        min_length=100,
         do_sample=False,
         num_beams=3,
         length_penalty=1.0,
