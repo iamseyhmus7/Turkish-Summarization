@@ -24,7 +24,7 @@ def summarize_input(text, pdf_file):
         return "Özetlenecek yeterli metin bulunamadı."
     # Çok uzun metinleri kırpabilirsin (isteğe bağlı)
     result = summarizer(text, max_length=80, min_length=20, do_sample=False)
-    return result[0]['summary_text']
+    return result[0]['generated_text']
 
 demo = gr.Interface(
     fn=summarize_input,
