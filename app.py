@@ -3,29 +3,42 @@ from transformers import pipeline
 from PyPDF2 import PdfReader
 import io
 
-# Hugging Face pipeline ile Türkçe özetleme modeli yükle
 summarizer = pipeline("text2text-generation", model="iamseyhmus7/Turkish-Summarization")
 
+MAX_CHARS = 1500  # Maksimum özetlenecek karakter
+
 def pdf_to_text(pdf_bytes):
-    reader = PdfReader(io.BytesIO(pdf_bytes))
-    text = ""
-    for page in reader.pages:
-        t = page.extract_text()
-        if t:
-            text += t + "\n"
-    return text
+    try:
+        reader = PdfReader(io.BytesIO(pdf_bytes))
+        text = ""
+        for page in reader.pages:
+            t = page.extract_text()
+            if t:
+                text += t + "\n"
+        return text
+    except Exception as e:
+        return ""
 
 def summarize_input(text, pdf_file):
-    # Öncelik PDF: Eğer PDF varsa onu kullan, yoksa metni kullan
     if pdf_file is not None:
         pdf_bytes = pdf_file.read()
         text = pdf_to_text(pdf_bytes)
     if not text or len(text.strip()) < 10:
         return "Özetlenecek yeterli metin bulunamadı."
-    # Çok uzun metinleri kırpabilirsin (isteğe bağlı)
-    result = summarizer(text, max_length=1000, min_length=50, do_sample=False,num_beams = 3 , length_penalty = 1.0, no_repeat_ngram_size = 2)
-
-    return result[0]['generated_text']
+    # Çok uzun metinleri kırp
+    if len(text) > MAX_CHARS:
+        text = text[:MAX_CHARS]
+    result = summarizer(
+        text,
+        max_length=1000,
+        min_length=50,
+        do_sample=False,
+        num_beams=3,
+        length_penalty=1.0,
+        no_repeat_ngram_size=2
+    )
+    summary = result[0].get('summary_text') or result[0].get('generated_text') or str(result[0])
+    return summary
 
 demo = gr.Interface(
     fn=summarize_input,
