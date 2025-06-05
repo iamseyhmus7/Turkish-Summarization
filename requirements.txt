@@ -2,3 +2,4 @@ gradio
 transformers
 PyPDF2
 torch
+sentencepiece
