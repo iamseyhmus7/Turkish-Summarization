@@ -1,7 +1,8 @@
 # 🇹🇷 Turkish Summarization with mT5
 
 Bu proje, **Türkçe metin özetleme** görevini gerçekleştirmek üzere **mT5-small** modelinin **tam (full) fine-tuning** yöntemiyle eğitilmesiyle geliştirilmiştir.  
-Eğitimde, Hugging Face üzerinde yer alan [`gullnihal/mlsum_tr`](https://huggingface.co/datasets/gullnihal/mlsum_tr) veri seti kullanılmıştır.
+Eğitimde, Hugging Face üzerinde yer alan [`gullnihal/mlsum_tr`](https://huggingface.co/datasets/gullnihal/mlsum_tr) veri seti kullanılmıştır.  
+Canlı olarak denemek için [🌐 Hugging Face Space - Turkish Summarization](https://huggingface.co/spaces/iamseyhmus7/turkish-summarization) sayfasını ziyaret edebilirsiniz.
 
 ## 🚀 Özellikler
 - **mT5-small** modeli ile Türkçe metin özetleme
@@ -20,13 +21,6 @@ Eğitimde, Hugging Face üzerinde yer alan [`gullnihal/mlsum_tr`](https://huggin
 - **Amaç:** Uzun Türkçe metinlerin anlam bütünlüğünü koruyarak kısa özetler üretmek
 - **Donanım:** Google Colab T4 / A100
 
-PDF Özetleme (örnek)
-python summarize_pdf.py dosya.pdf
-
-🌐 Canlı Demo
-Hugging Face Space: Turkish Summarization
-
-
 ## 📦 Kullanım
 ### Hugging Face ile
 ```python
@@ -41,4 +35,3 @@ inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
 
 summary_ids = model.generate(**inputs, max_length=64, min_length=10)
 print(tokenizer.decode(summary_ids[0], skip_special_tokens=True))
-
