@@ -24,13 +24,30 @@ Canlı olarak denemek için [🌐 Hugging Face Space - Turkish Summarization](ht
 ## 📦 Kullanım
 ### Hugging Face ile
 ```python
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-model_name = "iamseyhmus7/turkish-summarization"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+from transformers import pipeline
+# pipe özellikleri değiştirilebilir.
+pipe = pipeline("text2text-generation", model="iamseyhmus7/Turkish-Summarization")
+gen_kwargs = {
+    "length_penalty": 1.0,
+    "num_beams": 4,
+    "max_length": 1000,
+    "min_length": 50,
+    "no_repeat_ngram_size": 2
+}
 
-text = "Türkiye'nin ilk astronotu Alper Gezeravcı, ISS'teki görevini tamamladı."
+metin = """
+Sonbahar mevsimi geldiğinde doğa büyüleyici bir değişim yaşar.
+Ağaçların yaprakları sarı, turuncu ve kırmızı tonlarına bürünerek adeta bir renk cümbüşü oluşturur.
+Hafif esen rüzgar, yerdeki yaprakları savururken temiz ve serin bir hava hissedilir.
+İnsanlar kalın kıyafetlerini giymeye başlar, sıcak içecekler eşliğinde keyifli sohbetler eder.
+Doğa, kışa hazırlanırken dingin ve huzur verici bir atmosfer sunar. Bu mevsimin getirdiği sakinlik,
+hem ruhu dinlendirir hem de yeni başlangıçlar için ilham kaynağı olur.
+"""
+
+output = pipe(metin, **gen_kwargs)
+print(output[0]['generated_text'])
+revini tamamladı."
 inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
 
 summary_ids = model.generate(**inputs, max_length=64, min_length=10)
