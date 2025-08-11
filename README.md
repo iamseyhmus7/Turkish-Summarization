@@ -5,14 +5,14 @@ Eğitimde, Hugging Face üzerinde yer alan [`gullnihal/mlsum_tr`](https://huggin
 Canlı olarak denemek için [🌐 Hugging Face Space - Turkish Summarization](https://huggingface.co/spaces/iamseyhmus7/turkish-summarization) sayfasını ziyaret edebilirsiniz.
 
 ## 🚀 Özellikler
-- **mT5-small** modeli ile Türkçe metin özetleme
+- **mT5-small** modeli ile yüksek kaliteli Türkçe metin özetleme
 - Hem **metin girdisi** hem de **PDF belgelerinin** özetlenmesi
-- Hugging Face Spaces üzerinde canlı demo
-- Basit ve hızlı kullanım
+- Hugging Face Spaces üzerinde web arayüzlü canlı demo
+- Basit, hızlı ve Docker ile taşınabilir kullanım
 
 ## 📂 Veri Seti
 - Kaynak: [`gullnihal/mlsum_tr`](https://huggingface.co/datasets/gullnihal/mlsum_tr)
-- Türkçe haber metinlerinden oluşur
+- Türkçe haber metinlerinden oluşmaktadır
 - Eğitim/Doğrulama/Test ayrımı hazır
 
 ## 🛠️ Eğitim Süreci
@@ -20,6 +20,13 @@ Canlı olarak denemek için [🌐 Hugging Face Space - Turkish Summarization](ht
 - **Fine-tuning:** Tam model ağırlıkları güncellendi (full fine-tuning)
 - **Amaç:** Uzun Türkçe metinlerin anlam bütünlüğünü koruyarak kısa özetler üretmek
 - **Donanım:** Google Colab T4 / A100
+
+## 🐳 Docker Kullanımı
+Proje, **Docker** kullanılarak kolayca herhangi bir ortamda çalıştırılabilir hale getirilmiştir.  
+Tüm bağımlılıklar ve çalışma ortamı `Dockerfile` içinde tanımlanmıştır. Bu sayede:
+- Ortam uyumsuzluğu sorunları ortadan kalkar
+- Tek komutla kurulum ve çalıştırma yapılır
+- Proje bulut sunuculara kolayca taşınabilir
 
 ## 📦 Kullanım
 ### Hugging Face ile
