@@ -34,3 +34,9 @@ inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
 
 summary_ids = model.generate(**inputs, max_length=64, min_length=10)
 print(tokenizer.decode(summary_ids[0], skip_special_tokens=True))
+
+PDF Özetleme (örnek)
+python summarize_pdf.py dosya.pdf
+
+🌐 Canlı Demo
+Hugging Face Space: Turkish Summarization
