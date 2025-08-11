@@ -20,6 +20,13 @@ Eğitimde, Hugging Face üzerinde yer alan [`gullnihal/mlsum_tr`](https://huggin
 - **Amaç:** Uzun Türkçe metinlerin anlam bütünlüğünü koruyarak kısa özetler üretmek
 - **Donanım:** Google Colab T4 / A100
 
+PDF Özetleme (örnek)
+python summarize_pdf.py dosya.pdf
+
+🌐 Canlı Demo
+Hugging Face Space: Turkish Summarization
+
+
 ## 📦 Kullanım
 ### Hugging Face ile
 ```python
@@ -35,8 +42,3 @@ inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
 summary_ids = model.generate(**inputs, max_length=64, min_length=10)
 print(tokenizer.decode(summary_ids[0], skip_special_tokens=True))
 
-PDF Özetleme (örnek)
-python summarize_pdf.py dosya.pdf
-
-🌐 Canlı Demo
-Hugging Face Space: Turkish Summarization
